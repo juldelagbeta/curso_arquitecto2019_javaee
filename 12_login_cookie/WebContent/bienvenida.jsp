@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  
+<%--  
 <%Persona persona = (Persona)session.getAttribute("persona");%>
 
 <br/>
@@ -16,8 +16,18 @@ Usuario: <%=persona.getUsuario()%>
 email: <%=persona.getEmail()%>
 <br/>
 Edad: <%=persona.getEdad()%>
-
 <br/>
+ --%>
+ 
+<br/>
+Usuario: ${sessionScope.persona.usuario}
+<br/>
+email: ${sessionScope.persona.email}
+<br/>
+Edad: ${sessionScope.persona.edad}
+<br/>
+
+
  
 <a href='preferencias.html'>Volver</a>
 <br/>
