@@ -19,55 +19,42 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<%-- List<Contacto> listaContactos=(List<Contacto>)request.getAttribute("contactos");--%>
-
 	<c:set var="listaContactos" value="${requestScope.contactos}" />
-
 	<div class="container">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Email</th>
-					<th>Edad</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<%--
-	<%for(Contacto contacto:listaContactos){ %>
-      <tr>
-        <td><%=contacto.getIdContacto() %></td>
-        <td><%=contacto.getNombre() %></td>
-        <td><%=contacto.getEmail() %></td>
-        <td><%=contacto.getEdad() %></td>
-        <td><a href="Controller?op=doEliminar&id=<%=contacto.getIdContacto()%>">Borrar</a></td>
-      </tr>
-      <%} %>
-	--%>
-
-				<c:forEach var="contacto" items="${listaContactos}">
-					<tr>
-						<td>${contacto.idContacto}</td>
-						<td>${contacto.nombre}</td>
-						<td>${contacto.email}</td>
-						<td>${contacto.edad}</td>
-						<td><a
-							href="Controller?op=doEliminar&id=${contacto.idContacto}">Borrar</a></td>
-					</tr>
-				</c:forEach>
-
-
-			</tbody>
-		</table>
+		<c:choose>
+			<c:when test="${not empty requestScope.contactos}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Edad</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="contacto" items="${listaContactos}">
+							<tr>
+								<td>${contacto.idContacto}</td>
+								<td>${contacto.nombre}</td>
+								<td>${contacto.email}</td>
+								<td>${contacto.edad}</td>
+								<td><a href="Controller?op=doEliminar&id=${contacto.idContacto}">Borrar</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:when>
+			<c:otherwise>
+				No hay contactos
+			</c:otherwise>
+		</c:choose>
 		<div class="col-sm-10">
 			<a type="button" href='Controller?op=toEntrada.html'
 				class="btn btn-default">Volver</a>
 		</div>
 	</div>
-
 </body>
 </html>
 
